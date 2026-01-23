@@ -38,7 +38,7 @@ export const UPIPaymentForm: React.FC = () => {
       window.open(UPI_QR_IMAGE, '_blank');
       
       setStatus('completed');
-      showToast("Payment window opened! Products will be delivered in 2-3 hours after payment.", "success");
+      showToast("Payment window opened! Products will be available in My Library after 3 hours.", "success");
       
       // Redirect to dashboard
       setTimeout(() => {
@@ -59,7 +59,7 @@ export const UPIPaymentForm: React.FC = () => {
         </div>
         <h2 className="text-2xl font-bold text-white mb-2">Order Placed!</h2>
         <p className="text-textSecondary mb-4 max-w-md">
-          Complete the payment using the UPI QR code. Your products will be delivered to your email and dashboard within 2-3 hours after payment is received.
+          Complete the payment using the UPI QR code. Your products will appear in My Library immediately, but resources will be unlocked after 3 hours from payment.
         </p>
         <div className="px-4 py-2 bg-secondary/50 rounded-lg border border-white/5 text-sm font-mono text-accent">
           Redirecting to Dashboard...
@@ -101,7 +101,7 @@ export const UPIPaymentForm: React.FC = () => {
           <div className="mt-6 p-4 bg-accent/10 rounded-lg border border-accent/20">
             <p className="text-sm text-white font-medium mb-2">📦 Delivery Information</p>
             <p className="text-xs text-textSecondary">
-              Products will be delivered to your email and My Library dashboard within 2-3 hours after payment is received.
+              Products will appear in My Library immediately after payment, but download links will be unlocked 3 hours after payment is received.
             </p>
           </div>
         </div>
