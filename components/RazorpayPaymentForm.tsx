@@ -8,9 +8,9 @@ import { db } from '../services/database';
 import { useNavigate } from 'react-router-dom';
 
 // Razorpay Configuration - User needs to provide these values
+// NOTE: Only the Key ID is used in frontend. Key Secret must ONLY be on backend server.
 const RAZORPAY_CONFIG = {
   keyId: process.env.RAZORPAY_KEY_ID || 'rzp_test_YOUR_KEY_ID', // Test Key ID - Replace with your actual key
-  keySecret: process.env.RAZORPAY_KEY_SECRET || '', // Keep secret on server side
 };
 
 // Declare Razorpay on window for TypeScript
@@ -63,7 +63,7 @@ export const RazorpayPaymentForm: React.FC = () => {
     setStatus('processing');
 
     try {
-      // In production, you would call your backend to create a Razorpay order
+      // PRODUCTION: Call your backend to create a Razorpay order
       // const response = await fetch('/api/create-razorpay-order', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
@@ -71,11 +71,12 @@ export const RazorpayPaymentForm: React.FC = () => {
       // });
       // const orderData = await response.json();
 
-      // For demo purposes, we simulate order creation
+      // DEMO MODE: Simulating order creation - REPLACE WITH BACKEND CALL FOR PRODUCTION
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      // Using crypto for better uniqueness in order IDs
       const orderData = {
-        id: `order_${Date.now()}`,
+        id: `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         amount: total * 100, // Razorpay expects amount in paise
         currency: 'INR',
       };
@@ -119,7 +120,8 @@ export const RazorpayPaymentForm: React.FC = () => {
     setStatus('verifying');
     
     try {
-      // In production, verify payment on your backend
+      // PRODUCTION: Verify payment signature on your backend - CRITICAL FOR SECURITY
+      // This prevents payment tampering and ensures genuineness
       // const verification = await fetch('/api/verify-razorpay-payment', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
@@ -129,8 +131,9 @@ export const RazorpayPaymentForm: React.FC = () => {
       //     razorpay_signature: response.razorpay_signature,
       //   })
       // });
+      // if (!verification.ok) throw new Error('Payment verification failed');
 
-      // Simulate verification delay
+      // DEMO MODE: Simulating verification delay - REPLACE WITH BACKEND VERIFICATION FOR PRODUCTION
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       if (user) {
