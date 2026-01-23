@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { User as UserIcon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { InstantPaymentForm } from '../components/InstantPaymentForm';
+import { UPIPaymentForm } from '../components/UPIPaymentForm';
 
 export const Checkout: React.FC = () => {
   const { items, total } = useCart();
@@ -44,9 +44,9 @@ export const Checkout: React.FC = () => {
                     )}
                  </div>
 
-                 {/* Instant Payment Options */}
+                 {/* UPI Payment Form */}
                  <div className="rounded-xl border border-white/10 bg-secondary/50 p-6">
-                    <InstantPaymentForm />
+                    <UPIPaymentForm />
                  </div>
             </div>
 

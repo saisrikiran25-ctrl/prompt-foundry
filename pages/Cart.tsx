@@ -111,7 +111,7 @@ export const Cart: React.FC = () => {
             </button>
             
             <p className="mt-4 text-center text-xs text-textSecondary">
-                Secure checkout. Instant delivery.
+                Secure UPI payment. Delivered in 2-3 hours.
             </p>
           </div>
         </div>

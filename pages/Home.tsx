@@ -69,7 +69,7 @@ export const Home: React.FC = () => {
                     { 
                         icon: Lock, 
                         title: 'Secure & Private', 
-                        desc: 'Multiple instant payment options: UPI, PayPal, Bank Transfer, Crypto. Your choice!' 
+                        desc: 'Secure UPI payment gateway. Products delivered within 2-3 hours.' 
                     },
                 ].map((feature, i) => (
                     <div key={i} className="flex flex-col items-center text-center group">

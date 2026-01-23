@@ -10,7 +10,7 @@ View your app in AI Studio: https://ai.studio/apps/drive/1KuABnUFyQMDYeyKKS9vkbs
 
 ## Payment Integration
 
-This app uses **Razorpay** for secure payment processing. See [RAZORPAY_SETUP_GUIDE.md](RAZORPAY_SETUP_GUIDE.md) for detailed setup instructions.
+This app uses **UPI payment** for secure transactions. After clicking "Pay", customers are directed to a UPI QR code for payment. Products are delivered to email and the user's dashboard within 2-3 hours after payment is received.
 
 ## Run Locally
 
