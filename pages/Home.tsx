@@ -69,7 +69,7 @@ export const Home: React.FC = () => {
                     { 
                         icon: Lock, 
                         title: 'Secure & Private', 
-                        desc: 'Bank-grade checkout via ExpressUPI. Your data and usage remain 100% private.' 
+                        desc: 'Bank-grade checkout via Razorpay. Your data and usage remain 100% private.' 
                     },
                 ].map((feature, i) => (
                     <div key={i} className="flex flex-col items-center text-center group">

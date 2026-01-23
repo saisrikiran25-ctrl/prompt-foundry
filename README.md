@@ -8,6 +8,10 @@ This contains everything you need to run your app locally and deploy it to GitHu
 
 View your app in AI Studio: https://ai.studio/apps/drive/1KuABnUFyQMDYeyKKS9vkbsCB7f4cDIyn
 
+## Payment Integration
+
+This app uses **Razorpay** for secure payment processing. See [RAZORPAY_SETUP_GUIDE.md](RAZORPAY_SETUP_GUIDE.md) for detailed setup instructions.
+
 ## Run Locally
 
 **Prerequisites:**  Node.js
