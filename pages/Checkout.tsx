@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { User as UserIcon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { RazorpayPaymentForm } from '../components/RazorpayPaymentForm';
+import { InstantPaymentForm } from '../components/InstantPaymentForm';
 
 export const Checkout: React.FC = () => {
   const { items, total } = useCart();
@@ -44,9 +44,9 @@ export const Checkout: React.FC = () => {
                     )}
                  </div>
 
-                 {/* Razorpay Payment Form */}
+                 {/* Instant Payment Options */}
                  <div className="rounded-xl border border-white/10 bg-secondary/50 p-6">
-                    <RazorpayPaymentForm />
+                    <InstantPaymentForm />
                  </div>
             </div>
 
