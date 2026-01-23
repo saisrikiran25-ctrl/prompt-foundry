@@ -106,30 +106,39 @@ export const db = {
   },
 
   orders: {
-    // UPDATED: Removed stripePaymentId dependency
+    // UPDATED: Create order with pending status and 3-hour delay
     async create(userId: string, items: CartItem[], total: number): Promise<Order> {
         return new Promise((resolve) => {
             setTimeout(() => {
                 const orders = getTable<Order>(STORAGE_KEYS.ORDERS);
+                const purchaseTime = new Date();
+                const resourcesAvailableTime = new Date(purchaseTime.getTime() + (3 * 60 * 60 * 1000)); // 3 hours from now
+                
                 const newOrder: Order = {
                     id: `ord_${Math.random().toString(36).substr(2, 9)}`,
                     userId,
                     items,
                     total,
-                    date: new Date().toISOString(),
-                    status: 'completed'
+                    date: purchaseTime.toISOString(),
+                    status: 'pending', // Changed from 'completed' to 'pending'
+                    purchaseTimestamp: purchaseTime.toISOString(),
+                    resourcesAvailableAt: resourcesAvailableTime.toISOString()
                 };
                 
                 orders.unshift(newOrder); // Add to top
                 saveTable(STORAGE_KEYS.ORDERS, orders);
 
-                // Update User's Purchased Prompts
+                // Update User's Pending Prompts (not immediately available)
                 const users = getTable<User>(STORAGE_KEYS.USERS);
                 const userIndex = users.findIndex(u => u.uid === userId);
                 if (userIndex >= 0) {
                     const newIds = items.map(i => i.id);
-                    // Add unique IDs
-                    users[userIndex].purchasedPrompts = Array.from(new Set([...users[userIndex].purchasedPrompts, ...newIds]));
+                    // Initialize pendingPrompts if it doesn't exist
+                    if (!users[userIndex].pendingPrompts) {
+                        users[userIndex].pendingPrompts = [];
+                    }
+                    // Add unique IDs to pending prompts
+                    users[userIndex].pendingPrompts = Array.from(new Set([...users[userIndex].pendingPrompts, ...newIds]));
                     saveTable(STORAGE_KEYS.USERS, users);
                 }
 
@@ -141,6 +150,53 @@ export const db = {
     async getHistory(userId: string): Promise<Order[]> {
         const orders = getTable<Order>(STORAGE_KEYS.ORDERS);
         return orders.filter(o => o.userId === userId);
+    },
+
+    // NEW: Unlock resources for orders where 3 hours have passed
+    async unlockResources(userId: string): Promise<void> {
+        const orders = getTable<Order>(STORAGE_KEYS.ORDERS);
+        const users = getTable<User>(STORAGE_KEYS.USERS);
+        const userIndex = users.findIndex(u => u.uid === userId);
+        
+        if (userIndex < 0) return;
+        
+        const now = new Date();
+        let ordersUpdated = false;
+        let resourcesUnlocked: string[] = [];
+        
+        // Check each pending order
+        orders.forEach(order => {
+            if (order.userId === userId && order.status === 'pending' && order.resourcesAvailableAt) {
+                const availableAt = new Date(order.resourcesAvailableAt);
+                
+                // If 3 hours have passed, unlock the resources
+                if (now >= availableAt) {
+                    order.status = 'completed';
+                    ordersUpdated = true;
+                    resourcesUnlocked.push(...order.items.map(item => item.id));
+                }
+            }
+        });
+        
+        // Update orders if any were unlocked
+        if (ordersUpdated) {
+            saveTable(STORAGE_KEYS.ORDERS, orders);
+            
+            // Move products from pending to purchased
+            if (resourcesUnlocked.length > 0) {
+                const user = users[userIndex];
+                
+                // Add to purchasedPrompts
+                user.purchasedPrompts = Array.from(new Set([...user.purchasedPrompts, ...resourcesUnlocked]));
+                
+                // Remove from pendingPrompts
+                if (user.pendingPrompts) {
+                    user.pendingPrompts = user.pendingPrompts.filter(id => !resourcesUnlocked.includes(id));
+                }
+                
+                saveTable(STORAGE_KEYS.USERS, users);
+            }
+        }
     }
   }
 };

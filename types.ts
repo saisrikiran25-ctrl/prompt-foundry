@@ -60,7 +60,8 @@ export interface User {
   email: string;
   displayName: string;
   avatar: string;
-  purchasedPrompts: string[];
+  purchasedPrompts: string[]; // Products with available resources
+  pendingPrompts?: string[]; // Products ordered but resources not yet available
   createdAt: string;
   role: 'user' | 'admin';
 }
@@ -73,4 +74,6 @@ export interface Order {
   date: string;
   status: 'completed' | 'pending' | 'failed';
   paymentMethod?: string;
+  purchaseTimestamp?: string; // When payment was made
+  resourcesAvailableAt?: string; // When resources will be unlocked (payment + 3 hours)
 }
