@@ -61,6 +61,7 @@ export const db = {
             displayName,
             avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=38bdf8&color=0f172a`,
             purchasedPrompts: [],
+            pendingPrompts: [], // Initialize for new users
             createdAt: new Date().toISOString(),
             role: 'user'
           };
@@ -82,7 +83,14 @@ export const db = {
       const uid = localStorage.getItem(STORAGE_KEYS.SESSION);
       if (!uid) return null;
       const users = getTable<User>(STORAGE_KEYS.USERS);
-      return users.find(u => u.uid === uid) || null;
+      const user = users.find(u => u.uid === uid);
+      
+      // Ensure backward compatibility - initialize pendingPrompts if missing
+      if (user && !user.pendingPrompts) {
+        user.pendingPrompts = [];
+      }
+      
+      return user || null;
     }
   },
 
