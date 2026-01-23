@@ -8,6 +8,10 @@ This contains everything you need to run your app locally and deploy it to GitHu
 
 View your app in AI Studio: https://ai.studio/apps/drive/1KuABnUFyQMDYeyKKS9vkbsCB7f4cDIyn
 
+## Payment Integration
+
+This app uses **UPI payment** for secure transactions. After clicking "Pay", customers are directed to a UPI QR code for payment. Products are delivered to email and the user's dashboard within 2-3 hours after payment is received.
+
 ## Run Locally
 
 **Prerequisites:**  Node.js

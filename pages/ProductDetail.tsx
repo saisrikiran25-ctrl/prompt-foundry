@@ -326,10 +326,10 @@ export const ProductDetail: React.FC = () => {
                 {activeTab === 'faq' && (
                     <div className="space-y-4">
                         {[
-                            { q: "How do I access the prompt after purchase?", a: "Your purchased prompts are instantly available in the 'My Library' section of your Dashboard. We do not email files to ensure you always have access to the latest version." },
+                            { q: "How do I access the prompt after purchase?", a: "Your purchased prompts will be delivered to your email and the 'My Library' section of your Dashboard within 2-3 hours after payment is received and verified." },
                             { q: "Do these prompts work with the free version of ChatGPT?", a: "Most prompts are optimized for GPT-4 (Plus), but we include fallback versions for GPT-3.5 where possible. Check the 'Technical Specs' tab for specific model compatibility." },
                             { q: "Can I get a refund if it doesn't work?", a: "Yes. We offer a 14-day money-back guarantee if the prompt fails to generate the described results despite following the usage guide." },
-                            { q: "Do you provide invoices for businesses?", a: "Absolutely. A tax-compliant invoice is automatically generated and available for download in your Dashboard Order History." }
+                            { q: "Do you provide invoices for businesses?", a: "Absolutely. A tax-compliant invoice is automatically generated and available for download in your Dashboard Order History within 2-3 hours after payment." }
                         ].map((item, i) => (
                             <div key={i} className="rounded-xl border border-white/5 bg-secondary/30 p-5">
                                 <h4 className="flex items-start gap-3 font-bold text-white text-sm mb-2">
@@ -385,11 +385,11 @@ export const ProductDetail: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2">
                         <Download size={14} className="text-accent" />
-                        <span>Instant Digital Download (Dashboard)</span>
+                        <span>Delivery: 2-3 hours after payment</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <Shield size={14} className="text-accent" />
-                        <span>Secure SSL Payment</span>
+                        <span>Secure UPI Payment</span>
                     </div>
                 </div>
             </div>

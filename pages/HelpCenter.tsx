@@ -12,17 +12,17 @@ const FAQS: FaqItem[] = [
   {
     category: 'Access & Delivery',
     question: "How do I receive my prompts after purchase?",
-    answer: "We do not send prompts via email. Instead, all your purchased content is instantly available in the 'My Library' section of your Dashboard. This ensures you always have access to the most up-to-date versions."
+    answer: "After completing UPI payment, your purchased prompts will be delivered to your email and made available in the 'My Library' section of your Dashboard within 2-3 hours. This ensures secure verification of payment before delivery."
   },
   {
     category: 'Billing',
     question: "Where can I find my invoice?",
-    answer: "Invoices are generated and available in your Dashboard under 'Order History' within 24 hours of your purchase. You can view and download them at any time."
+    answer: "Invoices are generated and available in your Dashboard under 'Order History' within 2-3 hours after payment verification. You can view and download them at any time."
   },
   {
     category: 'Technical',
     question: "What if the prompt doesn't work with the specified model?",
-    answer: "Our prompts are battle-tested weekly. If an update to a model (like GPT-4) breaks functionality, we update the prompt in your Dashboard library. You get lifetime updates for every purchase."
+    answer: "Our prompts are battle-tested weekly. If an update to a model (like GPT-4) breaks functionality, we update the prompt in your Dashboard library within 2-3 hours. You get lifetime updates for every purchase."
   },
   {
     category: 'Technical',
