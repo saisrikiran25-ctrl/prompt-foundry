@@ -16,6 +16,7 @@ const STORAGE_KEYS = {
 };
 
 const DELAY = 1500; // Increased latency to simulate Stripe Backend verification
+const RESOURCE_UNLOCK_DELAY = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
 
 // Helper to read table
 const getTable = <T>(key: string): T[] => {
@@ -120,7 +121,7 @@ export const db = {
             setTimeout(() => {
                 const orders = getTable<Order>(STORAGE_KEYS.ORDERS);
                 const purchaseTime = new Date();
-                const resourcesAvailableTime = new Date(purchaseTime.getTime() + (3 * 60 * 60 * 1000)); // 3 hours from now
+                const resourcesAvailableTime = new Date(purchaseTime.getTime() + RESOURCE_UNLOCK_DELAY);
                 
                 const newOrder: Order = {
                     id: `ord_${Math.random().toString(36).substr(2, 9)}`,

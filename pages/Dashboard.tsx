@@ -9,17 +9,17 @@ import { db } from '../services/database';
 export const Dashboard: React.FC = () => {
   const { user, orders, refreshUserData } = useAuth();
 
-  // Check and unlock resources on component mount
+  // Check and unlock resources on component mount (only if there are pending prompts)
   useEffect(() => {
     const checkAndUnlockResources = async () => {
-      if (user) {
+      if (user && user.pendingPrompts && user.pendingPrompts.length > 0) {
         await db.orders.unlockResources(user.uid);
         await refreshUserData();
       }
     };
     
     checkAndUnlockResources();
-  }, [user?.uid]);
+  }, [user?.uid, user?.pendingPrompts?.length, refreshUserData]);
 
   if (!user) {
     return <Navigate to="/login" replace />;
