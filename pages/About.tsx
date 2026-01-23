@@ -11,7 +11,7 @@ export const About: React.FC = () => {
     saas: [
       { name: "ContentAccel", desc: "Content Optimization and Generation App" },
       { name: "Prompt Foundry", desc: "Luxe Marketplace for Premium AI Prompts" },
-      { name: "SendPersona", desc: "Sales Personalization and Optimization App" },
+      { name: "Aletheia", desc: "Zero-to-One Business Intelligence App" },
       { name: "Alpha AI Invoicing", desc: "AI Automated Invoice Generation App" }
     ],
     wrappers: [
