@@ -4,13 +4,13 @@ This guide will walk you through deploying your PromptFoundry webapp to GitHub P
 
 ## Prerequisites
 - A GitHub account
-- Repository admin access to saisrikiran25-ctrl/PromptFoundry
+- Repository admin access to saisrikiran25-ctrl/prompt-foundry
 
 ## Step-by-Step Deployment Instructions
 
 ### Step 1: Enable GitHub Pages in Repository Settings
 
-1. Go to https://github.com/saisrikiran25-ctrl/PromptFoundry
+1. Go to https://github.com/saisrikiran25-ctrl/prompt-foundry
 2. Click on **Settings** (top navigation bar)
 3. In the left sidebar, scroll down and click on **Pages**
 4. Under "Build and deployment":
@@ -41,7 +41,7 @@ This guide will walk you through deploying your PromptFoundry webapp to GitHub P
 ### Step 5: Access Your Deployed App
 
 Once the workflow completes successfully:
-- Your app will be live at: **https://saisrikiran25-ctrl.github.io/PromptFoundry/**
+- Your app will be live at: **https://saisrikiran25-ctrl.github.io/prompt-foundry/**
 
 ## Future Deployments
 
@@ -87,7 +87,7 @@ Visit http://localhost:4173 to see the production build.
 
 The following changes were made to enable GitHub Pages deployment:
 
-1. **vite.config.ts**: Added `base: '/PromptFoundry/'` to configure the correct base path for GitHub Pages
+1. **vite.config.ts**: Added `base: '/prompt-foundry/'` to configure the correct base path for GitHub Pages
 2. **.github/workflows/deploy.yml**: Created GitHub Actions workflow for automated deployment
 3. **README.md**: Added deployment documentation
 

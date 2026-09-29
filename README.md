@@ -53,7 +53,7 @@ Once the setup is complete:
 ### Access Your Deployed App
 
 After the deployment workflow completes (usually takes 1-2 minutes):
-- Your app will be available at: `https://[your-username].github.io/PromptFoundry/`
+- Your app will be available at: `https://[your-username].github.io/prompt-foundry/`
 - Replace `[your-username]` with your GitHub username
 
 ### Build Locally
