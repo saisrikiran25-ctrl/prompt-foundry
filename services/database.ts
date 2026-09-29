@@ -18,10 +18,26 @@ const STORAGE_KEYS = {
 const DELAY = 1500; // Increased latency to simulate Stripe Backend verification
 const RESOURCE_UNLOCK_DELAY = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
 
+const parseJsonSafely = <T>(value: string | null, fallback: T, key: string): T => {
+  if (!value) return fallback;
+  try {
+    return JSON.parse(value) as T;
+  } catch (error) {
+    console.error(`Invalid data found for storage key "${key}". Resetting key.`, error);
+    localStorage.removeItem(key);
+    return fallback;
+  }
+};
+
 // Helper to read table
 const getTable = <T>(key: string): T[] => {
   const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : [];
+  const parsed = parseJsonSafely<unknown>(data, [], key);
+  if (!Array.isArray(parsed)) {
+    localStorage.removeItem(key);
+    return [];
+  }
+  return parsed as T[];
 };
 
 // Helper to write table
