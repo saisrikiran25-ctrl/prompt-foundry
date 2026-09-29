@@ -17,6 +17,18 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+const parseGuestCart = (cartJson: string | null): CartItem[] => {
+  if (!cartJson) return [];
+  try {
+    const parsed = JSON.parse(cartJson);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error('Invalid guest cart data found. Resetting guest cart.', error);
+    localStorage.removeItem('pf_guest_cart');
+    return [];
+  }
+};
+
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const { user } = useAuth();
@@ -31,7 +43,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             // Check for guest items to merge
             const guestCartStr = localStorage.getItem('pf_guest_cart');
             if (guestCartStr) {
-                const guestItems: CartItem[] = JSON.parse(guestCartStr);
+                const guestItems = parseGuestCart(guestCartStr);
                 // Simple merge logic: Guest items overwrite DB items if duplicates, otherwise add
                 const mergedMap = new Map();
                 [...dbCart, ...guestItems].forEach(item => mergedMap.set(item.id, item));
@@ -46,9 +58,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         } else {
             // Load Guest Cart
             const storedCart = localStorage.getItem('pf_guest_cart');
-            if (storedCart) {
-                setItems(JSON.parse(storedCart));
-            }
+            setItems(parseGuestCart(storedCart));
         }
     };
     loadCart();
